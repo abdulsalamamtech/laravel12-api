@@ -29,3 +29,11 @@ Route::get('/', function () {
         ],
     ];
 })->name('api.home');
+
+
+
+
+require __DIR__.'/api/auth.php';
+require __DIR__.'/api/users.php';
+require __DIR__.'/api/guest.php';
+require __DIR__.'/api/admin.php';
