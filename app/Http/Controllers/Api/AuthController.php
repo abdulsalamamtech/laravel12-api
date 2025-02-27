@@ -12,6 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    /* 
+     * Register a new user
+     * @param array User $user
+     * @response Response object
+    **/
     public function register(Request $request)
     {
         $request->validate([
@@ -29,12 +34,18 @@ class AuthController extends Controller
         $token = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
+            'success' => true,
             'message' => 'User registered successfully',
             'user' => $user,
             'token' => $token,
         ], 201);
     }
 
+    /* 
+     * Login a user
+     * @param array User $user
+     * @response Response object
+    **/
     public function login(Request $request)
     {
         $request->validate([
@@ -52,23 +63,51 @@ class AuthController extends Controller
         $token = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
+            'success' => true,
             'message' => 'Login successful',
             'user' => $user,
             'token' => $token,
         ]);
     }
 
+    /* 
+     * Logout a user
+     * @param array User $user
+     * @response Response object
+    **/
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
+            'success' => true,
             'message' => 'Logged out successfully',
         ]);
     }
 
+    /* 
+     * Get auth user
+     * @param array User $user
+     * @response Response object
+    **/
     public function user(Request $request)
     {
         return response()->json($request->user());
-    }    
+    } 
+    
+    /* 
+     * Logout user from all devices
+     * @param array User $user
+     * @response Response object
+    **/
+    public function logoutDevices(Request $request)
+    {
+        $request->user()->token()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Logged out successfully',
+        ]);
+    }
 }
+
