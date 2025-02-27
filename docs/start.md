@@ -19,7 +19,17 @@
 # Other library dependencies
 3. Install laravel permission, cloudinary and scrable api docs
 ```sh
-     composer require spatie/laravel-permission
+    composer require spatie/laravel-permission
      * composer require cloudinary-labs/cloudinary-laravel
-     composer require thomasvantuycom/flysystem-cloudinary
+    composer require dedoc/scramble
+
+```
+
+
+## Simple terminal commands
+````sh
+
+    php artisan make:model Department -mcrR --api
+    php artisan make:resource DepartmentResource
+
 ```
